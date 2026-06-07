@@ -33,7 +33,7 @@ sbatch scripts/run_weak_scaling.sh
 MPI/          ← main distributed SpMV programs
 GPU/          ← local GPU kernels (TPV, reused from D1)
 CPU/          ← sequential reference (correctness validation only)
-include/      ← mtx_io.h (MTX reader), csr_utils.h (COO→CSR, local index)
+include/      ← mtx_io.h (MTX reader — symmetric expansion, pattern type)
 TIMER_LIB/    ← gettimeofday timing library
 scripts/      ← SLURM launchers, parse_results.py, plot scripts
 synthetic/    ← random sparse matrix generator (weak-scaling experiments)
@@ -46,15 +46,15 @@ docs/
 └── report_insights_d2.md  ← accumulated results (update after every run)
 ```
 
-## Algorithm (1D cyclic partition)
+## Algorithm (1D cyclic partition, MPI GPU-aware)
 
 1. `MPI_Init` → each rank binds to GPU `rank % ngpus`
 2. Rank 0 reads full MTX file (via `mtx_io.h`), distributes rows: `owner(i) = i mod P`
-3. Each rank converts local COO → local CSR (`csr_utils.h`)
-4. Each rank generates full x with fixed seed `srand(42)` (same values, no Allgather needed for random x)
-5. H2D transfer of local CSR + full x
-6. TPV kernel on local sub-matrix → local y
-7. D2H → `MPI_Gather` to rank 0 for correctness validation
+3. Each rank receives its local COO slice; remaps `global_row / P` → local row index
+4. x is block-distributed: rank r owns `x[r*blk .. (r+1)*blk - 1]` on the GPU
+5. **Each SpMV iteration:** `MPI_Allgatherv` gathers full x to every GPU (CUDA-aware MPI), then TPV kernel runs on local sub-matrix
+6. Communication time (Allgather) and compute time (kernel) are measured independently
+7. D2H → `MPI_Gatherv` to rank 0; reconstruct full y accounting for cyclic interleaving; correctness check vs CPU reference
 
 ## Datasets
 

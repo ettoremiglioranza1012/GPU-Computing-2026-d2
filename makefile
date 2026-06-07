@@ -9,9 +9,9 @@ OPT      = -O3
 GPU_ARCH = --gpu-architecture=sm_80
 GPU_FLAGS = -m64
 
-# MPI flags (OpenMPI --showme is available on the DISI cluster)
+# MPI flags — nvcc uses -Xlinker instead of GCC's -Wl, syntax
 MPI_CFLAGS := $(shell mpicc --showme:compile 2>/dev/null)
-MPI_LFLAGS := $(shell mpicc --showme:link   2>/dev/null)
+MPI_LFLAGS := $(shell mpicc --showme:link 2>/dev/null | sed 's/-Wl,/-Xlinker /g')
 
 # Directory layout
 INC_DIR   := include

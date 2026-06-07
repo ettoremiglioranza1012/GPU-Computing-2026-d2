@@ -1,0 +1,38 @@
+Loading OpenMPI/4.1.5-GCC-12.3.0
+  Loading requirement: GCCcore/12.3.0 zlib/1.2.13-GCCcore-12.3.0
+    binutils/2.40-GCCcore-12.3.0 GCC/12.3.0 numactl/2.0.16-GCCcore-12.3.0
+    XZ/5.4.2-GCCcore-12.3.0 libxml2/2.11.4-GCCcore-12.3.0
+    libpciaccess/0.17-GCCcore-12.3.0 hwloc/2.9.1-GCCcore-12.3.0 OpenSSL/1.1
+    libevent/2.1.12-GCCcore-12.3.0 UCX/1.14.1-GCCcore-12.3.0
+    libfabric/1.18.0-GCCcore-12.3.0 PMIx/4.2.4-GCCcore-12.3.0
+    UCC/1.2.0-GCCcore-12.3.0
+========================================
+SLURM job  : 1506309
+Node       : edu01
+Binary     : bin/MPI/spmv_mpi_baseline
+Matrix     : /home/ettore.miglioranza/GPU-Computing-2026-d2/Data/eu-2005/eu-2005.mtx
+MPI ranks  : 4
+GPUs       : NVIDIA A30
+NVIDIA A30
+NVIDIA A30
+NVIDIA A30
+========================================
+Correctness: PASSED
+Matrix: eu-2005  nrows=862664  ncols=862664  nnz=19235140  P=4
+Scatter time (startup, rank 0): 0.4141 s
+
+NNZ balance — min: 4803691  avg: 4808785  max: 4816671  imbalance: 0.27%
+
+rank,matrix,P,local_nnz,local_rows,kernel_ms,comm_ms,comm_vol_MB,mem_MB,bandwidth_GBs,gflops
+0,eu-2005,4,4803691,215666,0.6048,5.0602,3.45,61.96,128.5049,15.8848
+1,eu-2005,4,4809856,215666,0.6118,5.1024,3.45,62.03,127.1907,15.7226
+2,eu-2005,4,4804922,215666,0.5958,5.1023,3.45,61.97,130.4770,16.1286
+3,eu-2005,4,4816671,215666,0.6144,5.0593,3.45,62.11,126.8382,15.6793
+
+Wall-clock kernel time   (max across ranks): 0.6144 ms
+Wall-clock Allgather time (max across ranks): 5.1024 ms
+Total SpMV time (comm + compute):             5.7168 ms
+Comm fraction:                                89.3%
+Aggregate GFLOPs (2*NNZ/max_kernel_time):    62.6144
+
+[speedup and efficiency computed in post-processing from P=1 baseline]

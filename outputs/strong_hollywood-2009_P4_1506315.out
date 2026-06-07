@@ -1,0 +1,38 @@
+Loading OpenMPI/4.1.5-GCC-12.3.0
+  Loading requirement: GCCcore/12.3.0 zlib/1.2.13-GCCcore-12.3.0
+    binutils/2.40-GCCcore-12.3.0 GCC/12.3.0 numactl/2.0.16-GCCcore-12.3.0
+    XZ/5.4.2-GCCcore-12.3.0 libxml2/2.11.4-GCCcore-12.3.0
+    libpciaccess/0.17-GCCcore-12.3.0 hwloc/2.9.1-GCCcore-12.3.0 OpenSSL/1.1
+    libevent/2.1.12-GCCcore-12.3.0 UCX/1.14.1-GCCcore-12.3.0
+    libfabric/1.18.0-GCCcore-12.3.0 PMIx/4.2.4-GCCcore-12.3.0
+    UCC/1.2.0-GCCcore-12.3.0
+========================================
+SLURM job  : 1506315
+Node       : edu01
+Binary     : bin/MPI/spmv_mpi_baseline
+Matrix     : /home/ettore.miglioranza/GPU-Computing-2026-d2/Data/hollywood-2009/hollywood-2009.mtx
+MPI ranks  : 4
+GPUs       : NVIDIA A30
+NVIDIA A30
+NVIDIA A30
+NVIDIA A30
+========================================
+Correctness: PASSED
+Matrix: hollywood-2009  nrows=1139905  ncols=1139905  nnz=113891327  P=4
+Scatter time (startup, rank 0): 2.3758 s
+
+NNZ balance — min: 28418936  avg: 28472832  max: 28505311  imbalance: 0.30%
+
+rank,matrix,P,local_nnz,local_rows,kernel_ms,comm_ms,comm_vol_MB,mem_MB,bandwidth_GBs,gflops
+0,hollywood-2009,4,28418936,284977,11.4120,5.7330,4.56,346.73,39.9441,4.9805
+1,hollywood-2009,4,28505311,284976,12.0046,5.6836,4.56,347.76,38.0875,4.7491
+2,hollywood-2009,4,28474866,284976,11.7556,5.6835,4.56,347.40,38.8526,4.8445
+3,hollywood-2009,4,28492214,284976,12.1581,5.7312,4.56,347.61,37.5895,4.6870
+
+Wall-clock kernel time   (max across ranks): 12.1581 ms
+Wall-clock Allgather time (max across ranks): 5.7330 ms
+Total SpMV time (comm + compute):             17.8910 ms
+Comm fraction:                                32.0%
+Aggregate GFLOPs (2*NNZ/max_kernel_time):    18.7351
+
+[speedup and efficiency computed in post-processing from P=1 baseline]

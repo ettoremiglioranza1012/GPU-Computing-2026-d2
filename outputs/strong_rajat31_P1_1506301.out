@@ -1,0 +1,32 @@
+Loading OpenMPI/4.1.5-GCC-12.3.0
+  Loading requirement: GCCcore/12.3.0 zlib/1.2.13-GCCcore-12.3.0
+    binutils/2.40-GCCcore-12.3.0 GCC/12.3.0 numactl/2.0.16-GCCcore-12.3.0
+    XZ/5.4.2-GCCcore-12.3.0 libxml2/2.11.4-GCCcore-12.3.0
+    libpciaccess/0.17-GCCcore-12.3.0 hwloc/2.9.1-GCCcore-12.3.0 OpenSSL/1.1
+    libevent/2.1.12-GCCcore-12.3.0 UCX/1.14.1-GCCcore-12.3.0
+    libfabric/1.18.0-GCCcore-12.3.0 PMIx/4.2.4-GCCcore-12.3.0
+    UCC/1.2.0-GCCcore-12.3.0
+========================================
+SLURM job  : 1506301
+Node       : edu02
+Binary     : bin/MPI/spmv_mpi_baseline
+Matrix     : /home/ettore.miglioranza/GPU-Computing-2026-d2/Data/rajat31/rajat31.mtx
+MPI ranks  : 1
+GPUs       : NVIDIA L40S
+========================================
+Correctness: PASSED
+Matrix: rajat31  nrows=4690002  ncols=4690002  nnz=20316253  P=1
+Scatter time (startup, rank 0): 0.1970 s
+
+NNZ balance — min: 20316253  avg: 20316253  max: 20316253  imbalance: 0.00%
+
+rank,matrix,P,local_nnz,local_rows,kernel_ms,comm_ms,comm_vol_MB,mem_MB,bandwidth_GBs,gflops
+0,rajat31,1,20316253,4690002,0.4106,0.0000,18.76,281.32,837.2785,98.9492
+
+Wall-clock kernel time   (max across ranks): 0.4106 ms
+Wall-clock Allgather time (max across ranks): 0.0000 ms
+Total SpMV time (comm + compute):             0.4107 ms
+Comm fraction:                                0.0%
+Aggregate GFLOPs (2*NNZ/max_kernel_time):    98.9492
+
+[speedup and efficiency computed in post-processing from P=1 baseline]

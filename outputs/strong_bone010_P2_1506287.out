@@ -1,0 +1,34 @@
+Loading OpenMPI/4.1.5-GCC-12.3.0
+  Loading requirement: GCCcore/12.3.0 zlib/1.2.13-GCCcore-12.3.0
+    binutils/2.40-GCCcore-12.3.0 GCC/12.3.0 numactl/2.0.16-GCCcore-12.3.0
+    XZ/5.4.2-GCCcore-12.3.0 libxml2/2.11.4-GCCcore-12.3.0
+    libpciaccess/0.17-GCCcore-12.3.0 hwloc/2.9.1-GCCcore-12.3.0 OpenSSL/1.1
+    libevent/2.1.12-GCCcore-12.3.0 UCX/1.14.1-GCCcore-12.3.0
+    libfabric/1.18.0-GCCcore-12.3.0 PMIx/4.2.4-GCCcore-12.3.0
+    UCC/1.2.0-GCCcore-12.3.0
+========================================
+SLURM job  : 1506287
+Node       : edu01
+Binary     : bin/MPI/spmv_mpi_baseline
+Matrix     : /home/ettore.miglioranza/GPU-Computing-2026-d2/Data/bone010/bone010.mtx
+MPI ranks  : 2
+GPUs       : NVIDIA A30
+NVIDIA A30
+========================================
+Correctness: PASSED
+Matrix: bone010  nrows=986703  ncols=986703  nnz=71666325  P=2
+Scatter time (startup, rank 0): 1.4302 s
+
+NNZ balance — min: 35832975  avg: 35833162  max: 35833350  imbalance: 0.00%
+
+rank,matrix,P,local_nnz,local_rows,kernel_ms,comm_ms,comm_vol_MB,mem_MB,bandwidth_GBs,gflops
+0,bone010,2,35833350,493352,4.7507,2.7981,3.95,435.92,121.0993,15.0855
+1,bone010,2,35832975,493351,5.0737,2.7982,3.95,435.92,113.3881,14.1249
+
+Wall-clock kernel time   (max across ranks): 5.0737 ms
+Wall-clock Allgather time (max across ranks): 2.7982 ms
+Total SpMV time (comm + compute):             7.8719 ms
+Comm fraction:                                35.5%
+Aggregate GFLOPs (2*NNZ/max_kernel_time):    28.2499
+
+[speedup and efficiency computed in post-processing from P=1 baseline]
